@@ -21,7 +21,7 @@ public class EpicStepDefinition {
 
 	@Given("User is on landing page")
 	public void user_is_on_landing_page() throws IOException, InterruptedException {
-		userEpicPage.NewTab();
+		//userEpicPage.NewTab();
 		userEpicPage.ClsPop();
 		userEpicPage.LoginLanding();
 		userEpicPage.EmailInput();

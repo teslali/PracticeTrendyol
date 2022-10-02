@@ -149,6 +149,7 @@ public class UserEpicPage {
 	}
 
 	// logs in via google
+	// didnt use cus google do not trust browser that selenium opened
 	public WebDriver Google() throws IOException {
 		driver.findElement(google).click();
 		FileInputStream fis = new FileInputStream(
@@ -202,6 +203,7 @@ public class UserEpicPage {
 	}
 
 	public void LogOut() {
+		// log out
 		Actions actions = new Actions(driver);
 		WebElement out = driver.findElement(myAccount);
 		actions.moveToElement(out).perform();
@@ -209,6 +211,9 @@ public class UserEpicPage {
 	}
 
 	// opens new tab and goes back to first tab
+	// wanted to open a background music but didnt use it becasue couldnt find free
+	// recorder with system sound option, if used need to increase windowshandles
+	// numbers by one
 	public void NewTab() throws InterruptedException {
 		driver.switchTo().newWindow(WindowType.TAB);
 		driver.get("https://youtu.be/fT7hEq-J6aI?t=10");
@@ -223,16 +228,16 @@ public class UserEpicPage {
 
 	public void Gomlek() throws InterruptedException {
 		// clicks on "gomlek", performs a random click to check if a new tab opens, if
-		// it is shuts it down, if not continues normally
+		// it opens shuts it down, if not continues normally
 		Actions actions = new Actions(driver);
 		WebElement gomlek = driver.findElement(erkekHead);
 		actions.moveToElement(gomlek).perform();
 		driver.findElement(erkekGomlek).click();
 		driver.findElement(By.cssSelector("body")).click();
-		Thread.sleep(2500);
+		Thread.sleep(1000);
 		ArrayList<String> windowsHandles = new ArrayList<String>(driver.getWindowHandles());
 		try {
-			driver.switchTo().window(windowsHandles.get(2));
+			driver.switchTo().window(windowsHandles.get(1));
 			driver.close();
 			driver.switchTo().window(windowsHandles.get(0));
 		} catch (Exception e) {
@@ -253,7 +258,7 @@ public class UserEpicPage {
 		// new array needed idk why
 		// google> how to update arrays
 		ArrayList<String> windowsHandles0 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(windowsHandles0.get(2));
+		driver.switchTo().window(windowsHandles0.get(1));
 		Thread.sleep(3500);
 		for (int i = 0; i < 5; i++) {
 			driver.findElement(sagFoto).click();
@@ -274,13 +279,14 @@ public class UserEpicPage {
 		driver.findElement(searchBtn).click();
 		driver.findElement(lichKing).click();
 		ArrayList<String> windowsHandles1 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(windowsHandles1.get(3));
+		driver.switchTo().window(windowsHandles1.get(2));
 		Thread.sleep(1000);
 		driver.findElement(addCart).click();
 		driver.findElement(goCart).click();
 	}
 
 	public void EmptyCart() {
+		// remove first item from cart
 		driver.findElement(cartDelete).click();
 		driver.findElement(cartDelete2).click();
 	}
